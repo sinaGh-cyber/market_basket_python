@@ -1,4 +1,7 @@
-class done(Exception): pass
+class done(Exception):
+    pass
+
+
 marketBasket = {}
 
 
@@ -16,6 +19,7 @@ def menu(option):
     else:
         print('Eror: Enter a number between 0 and 4.')
 
+
 def help():
     print(""" 
               1. Add item
@@ -32,12 +36,21 @@ def add():
     if item in marketBasket.keys():
         marketBasket[item] += qty
     else:
-         marketBasket[item] = qty
+        marketBasket[item] = qty
 
 
 def delItem():
+
     item = input('Enter item to remove frome market basket: ')
-    marketBasket.pop(item, "Eror: this item dose't exist. ")
+    print(f'Do you want to delet all the {item}s? ')
+    yesOrNo = input('Enter your answer: (Yes/No): ')
+    if yesOrNo == 'No' or yesOrNo == 'no' or yesOrNo == 'N':
+        qty = int(input(
+            f'how many of {item} do you want to remove from your basket? (Enter a number): '))
+        marketBasket[item] -= qty
+    else:
+
+        marketBasket.pop(item, "Eror: this item dose't exist. ")
 
 
 def showBasketContent():
@@ -45,10 +58,9 @@ def showBasketContent():
     print('*'*30)
     print(' '*30)
     for key in marketBasket.keys():
-        print(key,' : ', marketBasket[key])
+        print(key, ' : ', marketBasket[key])
         print(' '*30)
         print('*'*30)
-
 
 
 def searchItem():
@@ -60,7 +72,7 @@ def searchItem():
 
 
 try:
-     while True:
+    while True:
         help()
         option = int(input('Enter option (0-4): '))
         menu(option)
